@@ -81,5 +81,36 @@ print(f"{poisson_probability(k, λ):0.3f}")
 Task: Poisson Distribution II
 #############################
 
-Expected value of a random variable
+Expected value of a random variable.
+
+Manager is planning to buy a machine of type A or B for each day's operation
+* Assume that repair time and financial costs are neglible, making the equipment good as new
+
+Find and print the expected daily cost for each machine
+
+
+Thoughts
+---------
+Remember that Expectation is a linear operation that carries information:
+* E[aX + b] = aE[X] + b
+
+Our equations are dealing with the squares of the random numbers (see below),
+  which means that I have to deal with the second moment, or the expectation
+  of the square of a random variable.
 """
+def second_moment(mean: float) -> float:
+  """E[X^2] for a Poisson mean"""
+  return mean + mean ** 2
+
+
+# Cost of A = 160 + 40X^2, where X is the random variable
+λ_A = 0.88
+
+# Cost of B = 128 + 40Y^2, where Y is the random variable
+λ_B = 1.55
+
+expected_cost_A = 160 + 40 * second_moment(λ_A)
+expected_cost_B = 128 + 40 * second_moment(λ_B)
+
+print(f"{expected_cost_A:0.3f}")
+print(f"{expected_cost_B:0.3f}")
